@@ -1,9 +1,16 @@
 FROM fedora:34
 
-COPY repositories/* /etc/yum.repos.d/
-COPY sleep.py .
+COPY files/repositories/* /etc/yum.repos.d/
+COPY files/scripts/* /opt/
 
 RUN dnf upgrade -y
-RUN dnf install python bash httpie kubectl terraform -y
+RUN dnf install git python bash bash-completion httpie kubectl terraform -y
 
-CMD python3 sleep.py
+# Configure bash-git-prompt
+RUN git clone https://github.com/magicmonty/bash-git-prompt.git /root/.bash-git-prompt --depth=1
+RUN cat /opt/bash-git-prompt.sh >> /root/.bashrc
+
+# Configure kubectl completion
+RUN cat /opt/kubectl-completion.sh >> /root/.bashrc
+
+CMD python3 /opt/sleep.py
