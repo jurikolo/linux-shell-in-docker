@@ -10,6 +10,7 @@ Short guide how to create Docker image
     * [kubectl](https://github.com/kubernetes/kubectl)
     * [terraform](https://www.terraform.io/)
     * [httpie](https://httpie.io/)
+    * and many more
 
 * Create an image
   ```bash
@@ -37,6 +38,11 @@ Short guide how to create Docker image
   ```bash
   sudo docker exec -it CONTAINER_ID_HERE /bin/bash
   ```
+  
+Alternatively it's possible to combine last 2 steps in one:
+```bash
+sudo docker run --rm -it --entrypoint /bin/bash linux-shell:0.0.1 
+```
 
 Voila, you are in a fully customizable shell now! 
 
